@@ -1,0 +1,6 @@
+dimension 2                                        #二维问题
+dimension 3                                        #三维问题
+
+boundary s s s                                     #s-自由；p-周期
+
+lattice hex 0.7                                    #hex-(1,sqrt(3));sc,fcc-(1,1,1)
