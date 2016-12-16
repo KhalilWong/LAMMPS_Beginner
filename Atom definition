@@ -1,1 +1,4 @@
 lattice hex 0.7                                    #hex-(1,sqrt(3));sc,fcc-(1,1,1)
+                                                   #scale factor between lattice and simulation box
+                                                   
+region box block 0 20 0 10 -0.25 0.25
