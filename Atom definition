@@ -5,4 +5,6 @@ region box block 0 20 0 10 -0.25 0.25              #block-(最小x,最大x,最�
 
 create_box 3 box                                   #原子种数3，区域名box
 
-create_atoms 1 box                                 #
+create_atoms 1 box                                 #box-fills the entire simulation box with particles on the lattice
+create_atoms 3 region regsphere basis 2 3          #region-a geometric volume is filled with particles on the lattice
+create_atoms 3 single 0 0 5                        #single-a single particle is added to the system at the specified coordinates
