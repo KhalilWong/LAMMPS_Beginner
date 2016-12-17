@@ -1,5 +1,21 @@
 pair_coeff * * 1.0 1.0 1.12246                          #修正pair_style？
 
-velocity lower set 0.0 0.0 0.0                          #温度单位
+group lower region 1                                    #分组
+group	boundary union lower upper                        #boundary=lower+upper
+group	flow subtract all boundary                        #flow=all-boundary
 
+set group lower type 2                                  #设置组为第2种原子
+
+compute mobile flow temp                                #将moblie定义为计算flow组的温度
+
+velocity flow create 1.0 482748 temp mobile             #将flow组创建温度为1.0（温度单位），随机种子号为482748，温度计算方法为mobile
+velocity lower set 0.0 0.0 0.0                          #三方向速度（速度单位）
+
+fix 1 all nve                                           #对所有的原子设定NVE系综
 fix 2 flow temp/rescale 200 1.0 1.5 0.02 1.0            #每200步进行一次，开始RUN温度为1.0，结束RUN温度为1.5，window，阻尼
+fix 3 boundary setforce 0.0 0.0 0.0                     #设置boundary中原子三方向上的力（力单位）
+fix 4 all enforce2d                                     #设置z方向速度和力为0
+fix 5 upper aveforce 0.0 -1.0 0.0                       #每个原子设置一个平均力（力单位）
+fix 6 flow addforce 0.5 0.0 0.0                         #每个原子加一个力（力单位）
+
+timestep 0.003                                          #时间步长0.003（时间单位）
