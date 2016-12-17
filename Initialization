@@ -2,3 +2,8 @@ dimension 2                                        #二维问题
 dimension 3                                        #三维问题
 
 boundary s s s                                     #s-自由；p-周期
+
+atom_style atomic                                  #atomic-only the default values
+                                                   #full-molecular + charge
+
+pair_style lj/cut 1.12246                          #lj/cut-没有库仑力的截断Lennard-Jones势;1.12246-Lennard-Jones作用的全局截距（距离单位）
